@@ -1,0 +1,293 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Data Science Fundamentals: Python |\n",
+    "[Table of Contents](../index.ipynb)\n",
+    "- - - \n",
+    "<!--NAVIGATION-->\n",
+    "Module 3. [Control Flow](./01_mod_control_flow.ipynb) | [Statements](./02_python_statements.ipynb) | [Functions](./03_python_functions.ipynb) | **[Exercises](./04_mod_exercises.ipynb)**"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Module 3: Practice Exercises"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "1. Guess a number between 1 to 9 given by the user. Hint. [Random](https://docs.python.org/3/library/random.html)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Guess a number between 1 and 9: 4\n",
+      "Guess a number between 1 and 9: 2\n",
+      "Guess a number between 1 and 9: 3\n",
+      "Guess a number between 1 and 9: 1\n",
+      "Correct!\n"
+     ]
+    }
+   ],
+   "source": [
+    "import random\n",
+    "number, guess = random.randint(1,10), 0\n",
+    "while number != guess: \n",
+    "        guess = int(input(\"Guess a number between 1 and 9: \"))\n",
+    "print (\"Correct!\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### 2. Check the validity of password input by the user. Hint. [Re](https://docs.python.org/3/library/re.html) which does matching operations much like Perl.\n",
+    "\n",
+    "Validation:\n",
+    "\n",
+    "- At least 1 letter between [a-z] and 1 letter between [A-Z].\n",
+    "- At least 1 number between [0-9].\n",
+    "- At least 1 character from [$#@].\n",
+    "- Minimum length 6 characters.\n",
+    "- Maximum length 16 characters."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Input your password: Genny2389!\n",
+      "Valid password\n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "p= input(\"Input your password: \")\n",
+    "x = True\n",
+    "while x:  \n",
+    "    if (len(p)<6 or len(p)>12):\n",
+    "        break\n",
+    "    elif not re.search(\"[a-z]\",p):\n",
+    "        break\n",
+    "    elif not re.search(\"[0-9]\",p):\n",
+    "        break\n",
+    "    elif not re.search(\"[A-Z]\",p):\n",
+    "        break\n",
+    "    elif not re.search(\"[$#@!]\",p):\n",
+    "        break\n",
+    "    else:\n",
+    "        print(\"Valid password\")\n",
+    "        x=False\n",
+    "        break\n",
+    "if x:\n",
+    "    print(\"Not a valid password\")\n",
+    "\n",
+    "    \n",
+    "## notes from Gary: re is a matching program"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "3. Get input of the age of 3 people by user and determine oldest and youngest among them"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Input the age of person 1: 32\n",
+      "Input the age of person 2: 12\n",
+      "Input the age of person 3: 64\n",
+      "The oldest of the bunch is :  64\n",
+      "The youngest of the bunch is :  12\n"
+     ]
+    }
+   ],
+   "source": [
+    "age1 = int(input(\"Input the age of person 1: \"))\n",
+    "age2 = int (input (\"Input the age of person 2: \"))\n",
+    "age3 = int (input (\"Input the age of person 3: \"))\n",
+    "\n",
+    "def oldest(age1,age2,age3):\n",
+    "    if (age1> age2) and (age1>age3):\n",
+    "        oldest_age = age1\n",
+    "    elif (age2>age1) and (age2>age3):\n",
+    "        oldest_age = age2\n",
+    "    else:\n",
+    "        oldest_age = age3\n",
+    "    print (\"The oldest of the bunch is : \", oldest_age)\n",
+    "    \n",
+    "\n",
+    "def youngest (age1,age2,age3):\n",
+    "    if (age1<age2) and (age1<3):\n",
+    "        youngest_age = age1\n",
+    "    if (age2<age1) and (age2<age3):\n",
+    "        youngest_age = age2\n",
+    "    else:\n",
+    "        youngest_age = age3\n",
+    "    print (\"The youngest of the bunch is : \", youngest_age)\n",
+    "\n",
+    "oldest (age1, age2, age3)\n",
+    "youngest (age1,age2, age3)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "## alternative -- used a sorting set"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "4. A student will not be allowed to sit in exam if his/her attendance is less than 75%.\n",
+    "\n",
+    "Take following input from user\n",
+    "\n",
+    "- Number of classes held\n",
+    "- Number of classes attended.\n",
+    "- And print percentage of class attended\n",
+    "- Is student is allowed to sit in exam or not?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Input the number of classes held in total: 100\n",
+      "Input the number of classes attended :82\n",
+      "You attended 82.0% of classes held.\n",
+      "Your attendance is greater than 75%. You can sit the exam.\n"
+     ]
+    }
+   ],
+   "source": [
+    "class_held = int(input(\"Input the number of classes held in total: \"))\n",
+    "class_attend = int(input(\"Input the number of classes attended :\"))\n",
+    "percent_attend = class_attend/class_held * 100\n",
+    "print (\"You attended \" + str(percent_attend) + \"% of classes held.\")\n",
+    "\n",
+    "if percent_attend < 75: \n",
+    "    print (\"Your attendance is less than 75%. You cannot sit the exam.\")\n",
+    "else : \n",
+    "        print(\"Your attendance is greater than 75%. You can sit the exam.\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "5. Get an integer N from the user and perform the following actions:\n",
+    "\n",
+    "Find out - \n",
+    "- if N is odd, print \"weird\"\n",
+    "- if N is even and in the inclusive range of 2 to 5, print \"Not Weird\"\n",
+    "- if N is even and in the inclusive range of 6 to 20, print \"Weird\"\n",
+    "- if N is even and greater than 20, print \"Not Weird\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Input an integer: 43\n",
+      "weird\n"
+     ]
+    }
+   ],
+   "source": [
+    "# get an integer from the user\n",
+    "N = int(input (\"Input an integer: \"))\n",
+    "\n",
+    "#if N is odd, print weird\n",
+    "if N/2 != 0:\n",
+    "    print (\"weird\")\n",
+    "\n",
+    "else: \n",
+    "    if N >= 2 and N <= 5: \n",
+    "        print (\"Not Weird\")\n",
+    "    elif N>=6 and N<=20: \n",
+    "        print (\"Weird\")\n",
+    "    elif N>20: \n",
+    "        print (\"Not Weird\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- - -\n",
+    "\n",
+    "Copyright © 2020 Qualex Consulting Services Incorporated."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
